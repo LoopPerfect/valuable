@@ -1,4 +1,4 @@
-# valuable
+# valuable 💎
 A C++ library implementing `value_ptr` - a smart-pointer with value-semantics.
 
 Value types are simple and intuitive. Unfortunately sometimes an implementation detail requires us to use pointers.
