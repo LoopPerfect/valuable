@@ -45,3 +45,16 @@ int main() {
 }
 
 ```
+
+# Installation
+
+This library requires a C++ 14 compiler.
+
+Install with Buckaroo:
+
+buckaroo install loopperfect/valuable
+The Buck target is :valuable
+
+Alternatively you can copy & paste the headers to your include path:
+
+cp valuable/include/*.hpp $InstallPath/include/valuable
