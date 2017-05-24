@@ -22,7 +22,7 @@ struct value_ptr {
   {}
 
   value_ptr(T const& value, Cloner const& cloner = Cloner())
-    : ptr{std::make_unique<T>(value)}
+    : ptr{cloner(value)}
     , cloner(cloner)
   {}
 

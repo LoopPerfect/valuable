@@ -34,6 +34,7 @@ TEST(value_ptr, lifetime) {
     ASSERT_EQ(constructions, 1);
     ASSERT_EQ(destructions, 1);
     ASSERT_EQ(copys, 1);
+    ASSERT_EQ(moves, 0);
 
     value_ptr<Sideeffect> y = x;
 
