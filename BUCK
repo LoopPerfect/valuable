@@ -1,7 +1,8 @@
 include_defs('//BUCKAROO_DEPS')
 
-cxx_library(
+prebuilt_cxx_library(
   name = 'valuable',
+  header_only = True,
   header_namespace = 'valuable',
   exported_headers = subdir_glob([
     ('valuable/include', '**/*.hpp'),
