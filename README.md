@@ -36,8 +36,8 @@ struct Tree {
 int main() {
   Tree root = Tree{
     "root",
-      Tree{"l0"}
-      Tree{"r0"}
+      Tree{"l"}
+      Tree{"r"}
   };
 
   root.left = root; // copy of root assigned to left
