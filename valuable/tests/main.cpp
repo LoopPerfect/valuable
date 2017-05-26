@@ -5,10 +5,10 @@ using namespace valuable;
 
 TEST(value_ptr, lifetime) {
 
-  static int constructions = 0;
-  static int destructions = 0;
-  static int moves = 0;
-  static int copys = 0;
+  static int constructions;
+  static int destructions;
+  static int moves;
+  static int copys;
 
   struct Sideeffect {
     Sideeffect() { ++constructions; }
