@@ -9,21 +9,23 @@ struct DefaultCloner {
   template <class T> T *operator()(T const &x) const { return new T(x); }
 };
 
-template <class T, class Cloner = DefaultCloner> struct value_ptr {
+template <class T, class Cloner = DefaultCloner> struct value_ptr : private Cloner {
   std::unique_ptr<T> ptr;
-  Cloner cloner;
+  Cloner &cloner() { return *this; }
+  Cloner const &cloner() const { return *this; };
+  T *clone(T const &x) const { return cloner()(x); }
 
-  value_ptr(Cloner const &cloner = Cloner()) : cloner(cloner) {}
+  value_ptr(Cloner const &cloner = Cloner()) : Cloner{cloner} {}
 
   value_ptr(T const &value, Cloner const &cloner = Cloner())
-      : ptr{cloner(value)}, cloner(cloner) {}
+      : Cloner{cloner}, ptr{clone(value)} {}
 
   value_ptr(value_ptr &&v)
-      : ptr{std::move(v.ptr)}, cloner{std::move(v.cloner)} {}
+      : Cloner{std::move(v)}, ptr{std::move(v.ptr)} {}
 
-  value_ptr(value_ptr const &v) : cloner(v.cloner) {
+  value_ptr(value_ptr const &v) : Cloner{v} {
     if (v) {
-      ptr.reset(cloner(*v.ptr));
+      ptr.reset(clone(*v));
     }
   }
 
@@ -34,8 +36,8 @@ template <class T, class Cloner = DefaultCloner> struct value_ptr {
   T const &operator*() const { return *ptr; }
 
   value_ptr<T> &operator=(value_ptr &&v) {
-    ptr = move(v.ptr);
-    cloner = move(v.cloner);
+    ptr = std::move(v.ptr);
+    cloner() = std::move(v);
     return *this;
   }
 
@@ -46,8 +48,8 @@ template <class T, class Cloner = DefaultCloner> struct value_ptr {
   T *operator->() { return get(); }
 
   value_ptr<T> &operator=(value_ptr const &v) {
-    cloner = v.cloner;
-    ptr.reset(cloner(*v.get()));
+    cloner() = v;
+    ptr.reset(clone(*v));
 
     return *this;
   }

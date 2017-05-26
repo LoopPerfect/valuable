@@ -62,13 +62,21 @@ TEST(value_ptr, cloner_transfer) {
     ASSERT_EQ(c.data, 10);
 
     value_ptr<int, Cloner> y;
-    ASSERT_EQ(y.cloner.data, -1);
-
+    ASSERT_EQ(y.cloner().data, -1);
+    
     value_ptr<int, Cloner> z1;
-    ASSERT_EQ(z1.cloner.data, -1);
+    ASSERT_EQ(z1.cloner().data, -1);
     value_ptr<int, Cloner> z2{c};
-    ASSERT_EQ(z2.cloner.data, c.data);
+    ASSERT_EQ(z2.cloner().data, c.data);
     value_ptr<int, Cloner> z3(z2);
-    ASSERT_EQ(z3.cloner.data, z2.cloner.data);
+    ASSERT_EQ(z3.cloner().data, z2.cloner().data);
+  }
+}
+
+
+TEST(value_ptr, empty_default_cloner) {
+  {
+    value_ptr<int> v;
+    ASSERT_EQ(sizeof(v), sizeof(std::unique_ptr<int>));
   }
 }
