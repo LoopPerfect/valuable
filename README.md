@@ -5,7 +5,9 @@ A C++ library implementing `value_ptr` - a smart-pointer with value-semantics.
 Value types are simple and intuitive. Unfortunately sometimes an implementation detail requires us to use pointers.
 The standard library demonstrates how handy smart-pointers can be for encoding ownership and lifetime semantics, but none of the smart-pointers implement value-semantics.
 
-This is why `valuable::value_ptr` was made.
+This is why `valuable::value_ptr` was made. 
+
+Read [value_ptr — The Missing C++ Smart-pointer](https://hackernoon.com/value-ptr-the-missing-c-smart-pointer-1f515664153e) on Hackernoon
 
 ## Example
 
@@ -56,10 +58,20 @@ Install with [Buckaroo](https://www.buckaroo.pm):
 buckaroo install loopperfect/valuable
 ```
 
-The Buck target is `:valuable`
+The [Buck](https://buckbuild.com/) target is `:valuable`
 
 Alternatively, you can copy & paste the headers into your include path:
 
 ```
 cp valuable/include/*.hpp $InstallPath/include/valuable
+```
+
+# Contributing
+
+We are accepting contributions! 
+
+Before you submit a PR, please run the tests: 
+
+```
+buck test
 ```
