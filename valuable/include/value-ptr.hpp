@@ -88,7 +88,7 @@ public:
   }
   value_ptr(value_ptr &&v) = default;
 
-  value_ptr(T *value) : ptr_(value) {}
+  explicit value_ptr(pointer value) : ptr_(value) {}
   pointer release() {
     return ptr().release();
   }
