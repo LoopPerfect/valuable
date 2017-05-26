@@ -1,4 +1,5 @@
 # valuable 💎
+
 A C++ library implementing `value_ptr` - a smart-pointer with value-semantics.
 
 Value types are simple and intuitive. Unfortunately sometimes an implementation detail requires us to use pointers.
@@ -49,7 +50,7 @@ int main() {
 
 This library requires a C++ 14 compiler.
 
-Install with Buckaroo:
+Install with [Buckaroo](https://www.buckaroo.pm):
 
 ```
 buckaroo install loopperfect/valuable
