@@ -11,22 +11,13 @@ TEST(value_ptr, lifetime) {
   static int copys = 0;
 
   struct Sideeffect {
-    Sideeffect() {
-      ++constructions;
-    }
+    Sideeffect() { ++constructions; }
 
-    Sideeffect(Sideeffect const&) {
-      ++copys;
-    }
+    Sideeffect(Sideeffect const &) { ++copys; }
 
+    Sideeffect(Sideeffect &&) { ++moves; }
 
-    Sideeffect(Sideeffect&&) {
-      ++moves;
-    }
-
-    ~Sideeffect() {
-      ++destructions;
-    }
+    ~Sideeffect() { ++destructions; }
   };
 
   {
@@ -38,7 +29,7 @@ TEST(value_ptr, lifetime) {
 
     value_ptr<Sideeffect> y = x;
 
-    ASSERT_EQ(constructions,  1);
+    ASSERT_EQ(constructions, 1);
     ASSERT_EQ(destructions, 1);
     ASSERT_EQ(copys, 2);
 
@@ -49,7 +40,6 @@ TEST(value_ptr, lifetime) {
     z = x;
     ASSERT_TRUE(constructions == 1);
     ASSERT_TRUE(copys == 3);
-
 
     ASSERT_EQ(moves, 0);
     value_ptr<Sideeffect> m = std::move(z);
@@ -70,10 +60,10 @@ TEST(value_ptr, cloner_transfer) {
     Cloner c;
     c.data = 10;
     ASSERT_EQ(c.data, 10);
-    
+
     value_ptr<int, Cloner> y;
     ASSERT_EQ(y.cloner.data, -1);
-    
+
     value_ptr<int, Cloner> z1;
     ASSERT_EQ(z1.cloner.data, -1);
     value_ptr<int, Cloner> z2{c};
@@ -82,4 +72,3 @@ TEST(value_ptr, cloner_transfer) {
     ASSERT_EQ(z3.cloner.data, z2.cloner.data);
   }
 }
-
