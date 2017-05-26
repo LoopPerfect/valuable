@@ -62,3 +62,24 @@ TEST(value_ptr, lifetime) {
   ASSERT_EQ(destructions, 4);
 }
 
+TEST(value_ptr, cloner_transfer) {
+  struct Cloner : DefaultCloner {
+    int data = -1;
+  };
+  {
+    Cloner c;
+    c.data = 10;
+    ASSERT_EQ(c.data, 10);
+    
+    value_ptr<int, Cloner> y;
+    ASSERT_EQ(y.cloner.data, -1);
+    
+    value_ptr<int, Cloner> z1;
+    ASSERT_EQ(z1.cloner.data, -1);
+    value_ptr<int, Cloner> z2{c};
+    ASSERT_EQ(z2.cloner.data, c.data);
+    value_ptr<int, Cloner> z3(z2);
+    ASSERT_EQ(z3.cloner.data, z2.cloner.data);
+  }
+}
+
