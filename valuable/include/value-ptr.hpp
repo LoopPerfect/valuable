@@ -26,13 +26,14 @@ struct value_ptr {
     , cloner(cloner)
   {}
 
-  value_ptr(value_ptr<T> && v)
+
+  value_ptr(value_ptr && v)
     : ptr{std::move(v.ptr)}
     , cloner{std::move(v.cloner)}
   {}
 
-  value_ptr(value_ptr<T> const& v)
-    : cloner(cloner)
+  value_ptr(value_ptr const& v)
+    : cloner(v.cloner)
   {
     if(v) {
       ptr.reset(cloner(*v.ptr));
@@ -45,7 +46,7 @@ struct value_ptr {
   T& operator*(){ return *ptr; }
   T const& operator*()const { return *ptr; }
 
-  value_ptr<T>& operator=(value_ptr<T>&& v) {
+  value_ptr<T>& operator=(value_ptr&& v) {
     ptr = move(v.ptr);
     cloner = move(v.cloner);
     return *this;
@@ -64,7 +65,7 @@ struct value_ptr {
   }
 
 
-  value_ptr<T>& operator=(value_ptr<T> const& v) {
+  value_ptr<T>& operator=(value_ptr const& v) {
     cloner = v.cloner;
     ptr.reset(
       cloner(*v.get())
