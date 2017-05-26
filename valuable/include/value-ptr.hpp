@@ -26,10 +26,11 @@ struct value_ptr {
     , cloner(cloner)
   {}
 
-  value_ptr(value_ptr&& v) {
-    ptr = std::move(v.ptr);
-    cloner = std::move(v.cloner);
-  }
+
+  value_ptr(value_ptr && v)
+    : ptr{std::move(v.ptr)}
+    , cloner{std::move(v.cloner)}
+  {}
 
   value_ptr(value_ptr const& v)
     : cloner(v.cloner)
