@@ -2,6 +2,12 @@
 #define VALUABLE_VALUE_PTR_HPP
 #include <memory>
 
+#ifdef _MSC_VER
+#define VALUABLE_DECLSPEC_EMPTY_BASES __declspec(empty_bases)
+#else
+#define VALUABLE_DECLSPEC_EMPTY_BASES
+#endif
+
 namespace valuable {
 
 namespace detail {
@@ -11,7 +17,7 @@ namespace detail {
   template <typename T> struct class_tag {};
 
   template <class T, class Deleter, class T2>
-  struct compressed_ptr : std::unique_ptr<T, Deleter>, T2 {
+  struct VALUABLE_DECLSPEC_EMPTY_BASES compressed_ptr : std::unique_ptr<T, Deleter>, T2 {
     using T1 = std::unique_ptr<T, Deleter>;
     compressed_ptr() = default;
     compressed_ptr(compressed_ptr &&) = default;
@@ -124,5 +130,7 @@ public:
   ~value_ptr() = default;
 };
 }
+
+#undef VALUABLE_DECLSPEC_EMPTY_BASES
 
 #endif
