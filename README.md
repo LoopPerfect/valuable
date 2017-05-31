@@ -66,6 +66,12 @@ Alternatively, you can copy & paste the headers into your include path:
 cp valuable/include/*.hpp $InstallPath/include/valuable
 ```
 
+You can also use Qt Creator for development. There's no need to build Google Test as it is built along with the test project. In the Build Steps, add the googletest git checkout path to the additional qmake arguments:
+```
+GOOGLETEST_PATH=d:/path/to/googletest
+```
+
+
 # Contributing
 
 We are accepting contributions! 
