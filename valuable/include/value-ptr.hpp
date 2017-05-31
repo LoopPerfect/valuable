@@ -2,6 +2,12 @@
 #define VALUABLE_VALUE_PTR_HPP
 #include <memory>
 
+#ifdef _MSC_VER
+#define VALUABLE_DECLSPEC_EMPTY_BASES __declspec(empty_bases)
+#else
+#define VALUABLE_DECLSPEC_EMPTY_BASES
+#endif
+
 namespace valuable {
 
 namespace detail {
@@ -11,11 +17,13 @@ namespace detail {
   template <typename T> struct class_tag {};
 
   template <class T, class Deleter, class T2>
-  struct compressed_ptr : std::unique_ptr<T, Deleter>, T2 {
+  struct VALUABLE_DECLSPEC_EMPTY_BASES compressed_ptr : std::unique_ptr<T, Deleter>, T2 {
     using T1 = std::unique_ptr<T, Deleter>;
     compressed_ptr() = default;
     compressed_ptr(compressed_ptr &&) = default;
     compressed_ptr(const compressed_ptr &) = default;
+    compressed_ptr(T2 &&a2) : T2(std::move(a2)) {}
+    compressed_ptr(const T2 &a2) : T2(a2) {}
     template <typename A1>
     compressed_ptr(A1 &&a1)
         : compressed_ptr(std::forward<A1>(a1), class_tag<typename std::decay<A1>::type>(),
@@ -28,9 +36,6 @@ namespace detail {
     compressed_ptr(A1 &&a1, A2 &&a2, A3 &&a3)
         : T1(std::forward<A1>(a1), std::forward<A2>(a2)), T2(std::forward<A3>(a3)) {}
 
-    template <typename A1>
-    compressed_ptr(A1 && a1, class_tag<T2>, spacer, spacer)
-        : T2(std::forward<A1>(a1)) {}
     template <typename A1>
     compressed_ptr(A1 && a1, class_tag<typename std::decay<A1>::type>, spacer, spacer)
         : T1(std::forward<A1>(a1)) {}
@@ -124,5 +129,7 @@ public:
   ~value_ptr() = default;
 };
 }
+
+#undef VALUABLE_DECLSPEC_EMPTY_BASES
 
 #endif
