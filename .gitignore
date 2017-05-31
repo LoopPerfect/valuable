@@ -3,3 +3,4 @@ buck-out
 BUCKAROO_DEPS
 .buckconfig.local
 .buckd
+*.pro.user
