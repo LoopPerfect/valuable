@@ -1,4 +1,7 @@
 # valuable 💎
+[![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/)
+[![Standard](https://img.shields.io/badge/c%2B%2B-14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization)
+[![Build Status](https://travis-ci.org/KubaO/valuable.svg?branch=master)](https://travis-ci.org/KubaO/valuable)
 
 A C++ library implementing `value_ptr` - a smart-pointer with value-semantics.
 
