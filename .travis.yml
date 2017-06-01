@@ -1,9 +1,10 @@
-language:
-  - cpp
+language: cpp
+sudo: false
+dist: trusty
 
 matrix:
   include:
-    - os: linux
+    - os: linux # GCC 5
       compiler: gcc
       env: MATRIX_EVAL="CXX=g++-5"
       addons:
@@ -12,6 +13,8 @@ matrix:
             - ubuntu-toolchain-r-test
           packages:
             - g++-5
+    - os: linux # GCC 4.8
+      compiler: gcc
     - os: linux
       compiler: clang
 
@@ -23,8 +26,6 @@ before_install:
 
 script:
   - ln -s include/value-ptr.hpp valuable
-#  - export STD=c++11
-#  - if [[ "$CXX" == "g++" ]]; then export CXX= export STD=c++0x; fi
   - $CXX -std=c++11 -Wall -Igoogletest/include -c googletest/src/gtest_main.cc -o gtest_main.o
   - $CXX -std=c++11 -Wall -Igoogletest/include -Igoogletest -c googletest/src/gtest-all.cc -o gtest-all.o
   - $CXX -std=c++11 -Wall -Igoogletest/include -I. -c valuable/tests/main.cpp -o main.o
