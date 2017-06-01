@@ -1,0 +1,21 @@
+language:
+  - cpp
+
+compiler:
+  - clang
+  - gcc
+
+before_install:
+  - curl -L -O https://github.com/google/googletest/archive/release-1.8.0.tar.gz
+  - tar -xf release-1.8.0.tar.gz
+  - ln -s googletest-release-1.8.0/googletest .
+
+script:
+  - pwd
+  - ln -s include/value-ptr.hpp valuable
+  - export STD=c++11
+  - if [[ "$CXX" == "g++" ]]; then export STD=c++0x; fi
+  - $CXX -std=$STD -Wall -Igoogletest/include -c googletest/src/gtest_main.cc -o gtest_main.o
+  - $CXX -std=$STD -Wall -Igoogletest/include -Igoogletest -c googletest/src/gtest-all.cc -o gtest-all.o
+  - $CXX -std=$STD -Wall -Igoogletest/include -I. -c valuable/tests/main.cpp -o main.o
+  - $CXX gtest_main.o gtest-all.o main.o -o main.t -lpthread && ./main.t
