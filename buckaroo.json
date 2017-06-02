@@ -1,6 +1,6 @@
 {
   "name": "value-ptr",
   "dependencies": {
-    "google/gtest": "1.8.0"
+    "google/gtest": "*"
   }
 }
