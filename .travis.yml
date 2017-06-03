@@ -1,0 +1,32 @@
+language: cpp
+sudo: false
+dist: trusty
+
+matrix:
+  include:
+    - os: linux # GCC 5
+      compiler: gcc
+      env: MATRIX_EVAL="CXX=g++-5"
+      addons:
+        apt:
+          sources: 
+            - ubuntu-toolchain-r-test
+          packages:
+            - g++-5
+    - os: linux # GCC 4.8
+      compiler: gcc
+    - os: linux
+      compiler: clang
+
+before_install:
+  - eval "$MATRIX_EVAL"
+  - curl -L -O https://github.com/google/googletest/archive/release-1.8.0.tar.gz
+  - tar -xf release-1.8.0.tar.gz
+  - ln -s googletest-release-1.8.0/googletest .
+
+script:
+  - ln -s include/value-ptr.hpp valuable
+  - $CXX -std=c++11 -Wall -Igoogletest/include -c googletest/src/gtest_main.cc -o gtest_main.o
+  - $CXX -std=c++11 -Wall -Igoogletest/include -Igoogletest -c googletest/src/gtest-all.cc -o gtest-all.o
+  - $CXX -std=c++11 -Wall -Igoogletest/include -I. -c valuable/tests/main.cpp -o main.o
+  - $CXX gtest_main.o gtest-all.o main.o -o main.t -lpthread && ./main.t
