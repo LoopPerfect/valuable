@@ -55,7 +55,7 @@ struct default_clone {
   T *operator()(T &&x) const { return new T(std::move(x)); }
 };
 
-template <class T, class Cloner = default_clone<T>, class Deleter = std::default_delete<T>>
+template <class T, class Cloner = default_clone<T>, class Deleter = std::default_delete<T> >
 class value_ptr {
   detail::compressed_ptr<T, Deleter, Cloner> ptr_;
 
@@ -74,7 +74,7 @@ public:
 
   value_ptr(const T &value) : ptr_(cloner_type()(value)) {}
   value_ptr(T &&value) : ptr_(cloner_type()(std::move(value))) {}
-  
+
   value_ptr(const Cloner &value) : ptr_(value) {}
   value_ptr(Cloner &&value) : ptr_(value) {}
 
