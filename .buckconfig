@@ -1,2 +1,5 @@
+[project]
+  ignore = .git
+
 [cxx]
   gtest_dep = google.gtest//:gtest

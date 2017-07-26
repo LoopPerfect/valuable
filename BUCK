@@ -12,8 +12,10 @@ cxx_test(
   srcs = glob([
     'valuable/tests/*.cpp'
   ]),
+  platform_compiler_flags = [
+    ('^macos.*', [ '-std=c++14' ]),
+  ],
   deps = [
     ':valuable',
   ],
 )
-
