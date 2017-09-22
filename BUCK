@@ -5,6 +5,9 @@ prebuilt_cxx_library(
   exported_headers = subdir_glob([
     ('valuable/include', '**/*.hpp'),
   ]),
+  visibility = [
+    'PUBLIC',
+  ],
 )
 
 cxx_test(
