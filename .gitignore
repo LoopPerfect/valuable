@@ -2,5 +2,7 @@ buckaroo
 buck-out
 BUCKAROO_DEPS
 .buckconfig.local
+.buckconfig.d
+buckaroo_macros.bzl
 .buckd
 *.pro.user

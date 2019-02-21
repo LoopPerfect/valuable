@@ -1,5 +1,12 @@
 [project]
   ignore = .git
 
+[parser]
+  default_build_file_syntax = SKYLARK
+
 [cxx]
-  gtest_dep = google.gtest//:gtest
+  should_remap_host_platform = true
+
+[cxx#macosx-86_64]
+  should_remap_host_platform = true
+  cxxflags = -std=c++14

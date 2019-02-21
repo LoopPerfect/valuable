@@ -1,3 +1,6 @@
+load('//:subdir_glob.bzl', 'subdir_glob')
+load('//:buckaroo_macros.bzl', 'buckaroo_deps_from_package')
+
 prebuilt_cxx_library(
   name = 'valuable',
   header_only = True,
@@ -10,15 +13,15 @@ prebuilt_cxx_library(
   ],
 )
 
+gtest = \
+  buckaroo_deps_from_package('github.com/buckaroo-pm/google-googletest')
+
 cxx_test(
   name = 'test',
   srcs = glob([
     'valuable/tests/*.cpp'
   ]),
-  platform_compiler_flags = [
-    ('^macos.*', [ '-std=c++14' ]),
-  ],
   deps = [
     ':valuable',
-  ],
+  ] + gtest,
 )

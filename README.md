@@ -1,4 +1,5 @@
 # valuable 💎
+
 [![Language](https://img.shields.io/badge/language-C++-blue.svg)](https://isocpp.org/)
 [![Standard](https://img.shields.io/badge/c%2B%2B-14-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization)
 [![Build Status](https://travis-ci.org/LoopPerfect/valuable.svg?branch=master)](https://travis-ci.org/LoopPerfect/valuable)
@@ -6,11 +7,10 @@
 A C++ library implementing `value_ptr` - a smart-pointer with value-semantics.
 
 Value types are simple and intuitive. Unfortunately sometimes an implementation detail requires us to use pointers.
+
 The standard library demonstrates how handy smart-pointers can be for encoding ownership and lifetime semantics, but none of the smart-pointers implement value-semantics.
 
 This is why `valuable::value_ptr` was made.
-
-Read [value_ptr — The Missing C++ Smart-pointer](https://hackernoon.com/value-ptr-the-missing-c-smart-pointer-1f515664153e) on Hackernoon
 
 ## Example
 
@@ -56,10 +56,10 @@ This library requires a C++ 14 compiler.
 
 ## Buckaroo
 
-Install with [Buckaroo](https://www.buckaroo.pm):
+Install with [Buckaroo](https://buckaroo.pm):
 
 ```
-buckaroo install loopperfect/valuable
+buckaroo add github.com/LoopPerfect/valuable
 ```
 
 The [Buck](https://buckbuild.com/) target is `:valuable`
@@ -87,7 +87,5 @@ We are accepting contributions! 💖
 Before you submit a PR, please run the tests:
 
 ```
-buck test
+buck test //...
 ```
-
-<a target='_blank' rel='nofollow' href='https://app.codesponsor.io/link/hq7GXSxnYW3qEM98fqMVob9v/LoopPerfect/valuable'>  <img alt='Sponsor' width='888' height='68' src='https://app.codesponsor.io/embed/hq7GXSxnYW3qEM98fqMVob9v/LoopPerfect/valuable.svg' /></a>

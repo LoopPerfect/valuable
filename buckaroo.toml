@@ -1,0 +1,6 @@
+targets = [ "//:valuable" ]
+
+[[dependency]]
+package = "github.com/buckaroo-pm/google-googletest"
+version = "*"
+private = true
