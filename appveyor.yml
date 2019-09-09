@@ -14,19 +14,21 @@ install:
   - ps: choco install wget -y --no-progress
   - ps: choco install zip -y --no-progress
   - ps: choco install buck -y --no-progress
+  - ps: choco install buckaroo -y --no-progress
   - ps: refreshenv
   - ps: choco list --localonly
   - ps: buck --version
-  - wget -q -O buckaroo-cli.jar https://github.com/LoopPerfect/buckaroo/releases/download/v1.4.1/buckaroo-cli.jar
+  - ps: buckaroo version
 
 # Disable automatic builds by MSBuild
 build: off
 
 build_script:
-  - java -jar buckaroo-cli.jar install
-
+  - buckaroo install
+  - buck build //:valuable --config *//cxx.untracked_headers=warn
+  
 test_script:
-  - buck test :test --config *//cxx.untracked_headers=warn
+  - buck test //:test --config *//cxx.untracked_headers=warn
 
 cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
