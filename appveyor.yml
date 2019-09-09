@@ -25,10 +25,7 @@ build: off
 
 build_script:
   - buckaroo install
-  - buck build //:valuable --config *//cxx.untracked_headers=warn
-  
-test_script:
-  - buck test //:test --config *//cxx.untracked_headers=warn
+  - buck build //:valuable
 
 cache:
   - C:\ProgramData\chocolatey\bin -> appveyor.yml
