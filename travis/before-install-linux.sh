@@ -24,6 +24,7 @@ chmod +x ./bin/buck
 
 wget -c https://github.com/LoopPerfect/buckaroo/releases/download/$BUCKAROO_VERSION/buckaroo-linux -O bin/buckaroo
 chmod +x ./bin/buckaroo
-./bin/buckaroo version
+sudo cp ./bin/buckaroo /usr/bin/buckaroo
+buckaroo version
 
 fi

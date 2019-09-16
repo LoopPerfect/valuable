@@ -20,6 +20,7 @@ addons:
 os:
   - linux
   - osx
+  - windows
 
 env:
   - BUCKAROO_VERSION=v2.2.0 PKG_CONFIG_PATH=/usr/lib/pkgconfig
