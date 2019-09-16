@@ -6,3 +6,4 @@ BUCKAROO_DEPS
 buckaroo_macros.bzl
 .buckd
 *.pro.user
+bazel-*

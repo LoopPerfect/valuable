@@ -1,4 +1,4 @@
-manifest = "07b3723fa04212eb97433bf259b05b45d71040ed4fa7d7ce72259e7adf9f5a11"
+manifest = "e3b04b78629af7145cf80fae3831fa3b497673d82ced6881499e24edb3225628"
 
 [[dependency]]
 package = "github.com/buckaroo-pm/google-googletest"
