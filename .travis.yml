@@ -10,6 +10,12 @@ addons:
       - g++-6
       - gcc-6
       - make
+      - pkg-config
+      - zip
+      - g++
+      - zlib1g-dev
+      - unzip
+      - python3
 
 os:
   - linux
@@ -17,6 +23,7 @@ os:
 
 env:
   - BUCKAROO_VERSION=v2.2.0 PKG_CONFIG_PATH=/usr/lib/pkgconfig
+  - BUCKAROO_VERSION=bazel-alpha-1 BUCKAROO_USE_BAZEL=1 PKG_CONFIG_PATH=/usr/lib/pkgconfig
 
 cache:
   directories:
@@ -29,6 +36,4 @@ before_install:
   - ./travis/before-install-$TRAVIS_OS_NAME.sh
 
 script:
-  - ./bin/buckaroo install
-  - ./bin/buck build -c ui.superconsole=DISABLED //:valuable
-  - ./bin/buck test -c ui.superconsole=DISABLED //...
+  - ./travis/script.sh
