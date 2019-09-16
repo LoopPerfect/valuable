@@ -4,9 +4,9 @@ load('//:buckaroo_macros.bzl', 'buckaroo_deps_from_package')
 prebuilt_cxx_library(
   name = 'valuable',
   header_only = True,
-  header_namespace = 'valuable',
+  header_namespace = '',
   exported_headers = subdir_glob([
-    ('valuable/include', '**/*.hpp'),
+    ('include', '**/*.hpp'),
   ]),
   visibility = [
     'PUBLIC',
@@ -19,7 +19,7 @@ gtest = \
 cxx_test(
   name = 'test',
   srcs = glob([
-    'valuable/tests/*.cpp'
+    'tests/**/*.cpp',
   ]),
   deps = [
     ':valuable',
