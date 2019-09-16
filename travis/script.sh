@@ -9,7 +9,7 @@ bazel build //:valuable
 
 else
 
-./bin/buck build -c ui.superconsole=DISABLED //:valuable
-./bin/buck test -c ui.superconsole=DISABLED //...
+buck build -c ui.superconsole=DISABLED //:valuable
+buck test -c ui.superconsole=DISABLED //...
 
 fi
